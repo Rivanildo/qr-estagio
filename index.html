@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela de Informações</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container mt-5 pt-4">
+        <!-- Navegação -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+            <a class="navbar-brand" href="#">Lista de frequencia no estágio ECIT</a>
+        </nav>
+
+        <!-- Botão de Novo Registro -->
+        <div class="mb-3">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#addRecordModal">Novo Registro</button>
+        </div>
+
+        <!-- Tabela de Informações -->
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Meus Registros</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table custom-table">
+                        <thead>
+                            <tr>
+                                <th>Data e Hora</th>
+                                <th>Nome</th>
+                                <th>Local do Estágio</th>
+                                <th>Supervisor</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="results-body">
+                            <!-- Dados serão inseridos aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Novo Registro -->
+        <div class="modal fade" id="addRecordModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">Leitor de QR Code</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="qr-reader" class="embed-responsive embed-responsive-4by3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toasts -->
+    <div class="toast-container position-fixed bottom-0 right-0 p-3">
+        <div id="success-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <strong class="mr-auto">Sucesso</strong>
+                <small>Agora</small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                Dados armazenados com sucesso!
+            </div>
+        </div>
+        <div id="error-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-danger text-white">
+                <strong class="mr-auto">Erro</strong>
+                <small>Agora</small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                Ocorreu um erro ao armazenar os dados.
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <script src="script.js"></script>
+</body>
+</html>

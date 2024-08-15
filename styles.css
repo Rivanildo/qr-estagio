@@ -1,0 +1,49 @@
+/* styles.css */
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    margin-bottom: 1rem;
+}
+
+.card {
+    margin-top: 1rem;
+}
+
+.custom-table th, .custom-table td {
+    text-align: center;
+}
+
+.custom-table th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.custom-table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+.toast {
+    width: 300px;
+}
+
+.toast-header {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.toast-body {
+    font-size: 0.875rem;
+}
+
+.modal-content {
+    border-radius: 0.5rem;
+}
+
+#qr-reader {
+    height: 300px;
+}
