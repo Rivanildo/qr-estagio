@@ -39,15 +39,19 @@ $('#addRecordModal').on('hidden.bs.modal', function () {
     stopScanning();
 });
 
+
 async function addResult(decodedText) {
+    var parsedText = decodedText ;
+    
     const items = [];
     const data = localStorage.getItem('qrData');
     if (data) {
         items.push(...JSON.parse(data));
     }
     const newItem = {
-        name: decodedText,  // Texto decodificado diretamente
+        nome: parsedText,
         timestamp: new Date().toLocaleString(),
+        status: 'pending'
     };
     items.push(newItem);
     localStorage.setItem('qrData', JSON.stringify(items));
@@ -55,9 +59,9 @@ async function addResult(decodedText) {
 
     // Enviar dados para o servidor
     const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");  // Mudado para application/json
+    myHeaders.append("Content-Type", "text/plain");
 
-    const raw = JSON.stringify({ data: decodedText });  // Enviar como string simples dentro de um objeto JSON
+    const raw = JSON.stringify({ data: JSON.stringify(newItem) });
 
     const requestOptions = {
         method: "POST",
@@ -65,8 +69,7 @@ async function addResult(decodedText) {
         body: raw
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbx0ELzpU0Al2NsM2--1pRwesrZIykS9dgs43nfjrVSSHoHJ4aFe1mndX8yjwaAe05Pw/exec", requestOptions)
-    .then(response => response.json())
+    fetch("https://script.google.com/macros/s/AKfycbxVoCF12H9O3M-wCJSDvs63P-M5kGTLROeSzb0zsDlWAVa8b6oyazAh5rVikZLWNl_6dg/exec", requestOptions)
     .then(data => {
         console.log('data::: ', data);
         const updatedItem = { ...newItem, status: 'success' };
@@ -76,7 +79,7 @@ async function addResult(decodedText) {
         console.error('Erro ao enviar dados para o servidor:', error);
         const updatedItem = { ...newItem, status: 'error' };
         updateResultStatus(updatedItem);
-    });
+    })
 }
 
 function updateResultStatus(updatedItem) {
@@ -102,7 +105,7 @@ function displayResults() {
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${item.timestamp}</td>
-                <td>${item.name}</td>
+                <td>${item.nome}</td>
                 <td>
                     <i class="fa ${item.status === 'success' ? 'fa-check-circle text-success' : item.status === 'error' ? 'fa-times-circle text-danger' : 'fa-hourglass-half text-warning'}" aria-hidden="true"></i>
                 </td>
