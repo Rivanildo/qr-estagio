@@ -46,9 +46,8 @@ async function addResult(decodedText) {
         items.push(...JSON.parse(data));
     }
     const newItem = {
-        name: decodedText,  // Usar o texto decodificado diretamente
+        name: decodedText,  // Texto decodificado diretamente
         timestamp: new Date().toLocaleString(),
-        status: 'pending'
     };
     items.push(newItem);
     localStorage.setItem('qrData', JSON.stringify(items));
@@ -56,9 +55,9 @@ async function addResult(decodedText) {
 
     // Enviar dados para o servidor
     const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "text/plain");
+    myHeaders.append("Content-Type", "application/json");  // Mudado para application/json
 
-    const raw = JSON.stringify({ data: decodedText });  // Enviar como string simples
+    const raw = JSON.stringify({ data: decodedText });  // Enviar como string simples dentro de um objeto JSON
 
     const requestOptions = {
         method: "POST",
@@ -67,6 +66,7 @@ async function addResult(decodedText) {
     };
 
     fetch("https://script.google.com/macros/s/AKfycbx0ELzpU0Al2NsM2--1pRwesrZIykS9dgs43nfjrVSSHoHJ4aFe1mndX8yjwaAe05Pw/exec", requestOptions)
+    .then(response => response.json())
     .then(data => {
         console.log('data::: ', data);
         const updatedItem = { ...newItem, status: 'success' };
