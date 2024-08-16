@@ -50,10 +50,8 @@ async function addResult(decodedText) {
     }
     const newItem = {
         name: parsedText.nome,
-        local: parsedText.local,
-        supervisor: parsedText.supervisor,
         timestamp: new Date().toLocaleString(),
-        status: 'pending'
+        
     };
     items.push(newItem);
     localStorage.setItem('qrData', JSON.stringify(items));
