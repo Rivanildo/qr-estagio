@@ -69,7 +69,7 @@ async function addResult(decodedText) {
         body: raw
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbxVoCF12H9O3M-wCJSDvs63P-M5kGTLROeSzb0zsDlWAVa8b6oyazAh5rVikZLWNl_6dg/exec", requestOptions)
+    fetch("https://script.google.com/macros/s/AKfycbx0ELzpU0Al2NsM2--1pRwesrZIykS9dgs43nfjrVSSHoHJ4aFe1mndX8yjwaAe05Pw/exec", requestOptions)
     .then(data => {
         console.log('data::: ', data);
         const updatedItem = { ...newItem, status: 'success' };
