@@ -108,8 +108,7 @@ function displayResults() {
             row.innerHTML = `
                 <td>${item.timestamp}</td>
                 <td>${item.name}</td>
-                <td>${item.local}</td>
-                <td>${item.supervisor}</td>
+
                 <td>
                     <i class="fa ${item.status === 'success' ? 'fa-check-circle text-success' : item.status === 'error' ? 'fa-times-circle text-danger' : 'fa-hourglass-half text-warning'}" aria-hidden="true"></i>
                 </td>
