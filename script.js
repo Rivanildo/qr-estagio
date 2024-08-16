@@ -39,19 +39,15 @@ $('#addRecordModal').on('hidden.bs.modal', function () {
     stopScanning();
 });
 
-
 async function addResult(decodedText) {
-    var parsedText = JSON.parse(decodedText);
-    
     const items = [];
     const data = localStorage.getItem('qrData');
     if (data) {
         items.push(...JSON.parse(data));
     }
     const newItem = {
-        name: parsedText.nome,
+        name: decodedText,  // Usar o texto decodificado diretamente
         timestamp: new Date().toLocaleString(),
-        
     };
     items.push(newItem);
     localStorage.setItem('qrData', JSON.stringify(items));
@@ -61,7 +57,7 @@ async function addResult(decodedText) {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "text/plain");
 
-    const raw = JSON.stringify({ data: JSON.stringify(parsedText) });
+    const raw = JSON.stringify({ data: decodedText });  // Enviar como string simples
 
     const requestOptions = {
         method: "POST",
@@ -79,7 +75,7 @@ async function addResult(decodedText) {
         console.error('Erro ao enviar dados para o servidor:', error);
         const updatedItem = { ...newItem, status: 'error' };
         updateResultStatus(updatedItem);
-    })
+    });
 }
 
 function updateResultStatus(updatedItem) {
@@ -106,7 +102,6 @@ function displayResults() {
             row.innerHTML = `
                 <td>${item.timestamp}</td>
                 <td>${item.name}</td>
-
                 <td>
                     <i class="fa ${item.status === 'success' ? 'fa-check-circle text-success' : item.status === 'error' ? 'fa-times-circle text-danger' : 'fa-hourglass-half text-warning'}" aria-hidden="true"></i>
                 </td>
