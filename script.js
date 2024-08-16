@@ -48,6 +48,7 @@ async function addResult(decodedText) {
     const newItem = {
         name: decodedText,  // Usar o texto decodificado diretamente
         timestamp: new Date().toLocaleString(),
+        status: 'pending'
     };
     items.push(newItem);
     localStorage.setItem('qrData', JSON.stringify(items));
